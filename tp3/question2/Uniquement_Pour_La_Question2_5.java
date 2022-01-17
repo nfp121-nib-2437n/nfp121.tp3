@@ -2,7 +2,7 @@ package question2;
 
 public class Uniquement_Pour_La_Question2_5 extends junit.framework.TestCase{
     public void test_equals_question2_5() throws Exception{
-        // sÃ©lection de la zone commentÃ©e ci-dessous, puis F7 sous bluej, si vous adoptez la mÃ©thode equals de Q2.5
+        // sélection de la zone commentée ci-dessous, puis F7 sous bluej, si vous adoptez la méthode equals de Q2.5
         // PileI p  = new Pile(4);
         // PileI p1 = new Pile(6);
         // PileI p2 = new Pile2(6);

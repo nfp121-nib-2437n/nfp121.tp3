@@ -7,68 +7,89 @@ import question1.PileVideException;
  * A remplacer en partie par votre classe Pile de la question 1.
  * 
  * @author (votre nom)
- * @version (un numÃ©ro de version ou une date)
+ * @version (un numéro de version ou une date)
  */
 public class Pile implements PileI {
 
     private Object[] zone;
     private int ptr;
+    public static int TAILLE_PAR_DEFAUT = 5;
 
     public Pile(int taille) {
-        // traiter le cas <=0
-        // a completer
+        if(taille < 0) {taille = TAILLE_PAR_DEFAUT+1;}
+        zone = new Object[taille];
+        ptr =0;
     }
 
     public Pile() {
-        this(0);
+        zone = new Object[TAILLE_PAR_DEFAUT+1];
+        ptr =0;
     }
 
     public void empiler(Object o) throws PilePleineException {
-        // a completer
+        if (estPleine())
+            throw new PilePleineException();
+        this.zone[this.ptr] = o;
+        this.ptr++;
     }
 
     public Object depiler() throws PileVideException {
-        // a completer
-        return null;
+        if (estVide())
+            throw new PileVideException();
+        this.ptr--;
+        return zone[ptr];
     }
 
     public Object sommet() throws PileVideException {
-        // a completer
-        return null;
+        return zone[taille()-1];
     }
 
     public int capacite() {
-        // a completer
-        return -1;
+        //System.out.println("capacite :"+ zone.length);
+        return zone.length;
     }
 
     public int taille() {
-        // a completer
-        return -1;
+        return ptr;
     }
 
     public boolean estVide() {
-        // a completer
-        return false;
+        return taille() ==0;
     }
 
     public boolean estPleine() {
-        // a completer
-        return false;
+        //System.out.println("taille : "+taille());
+        //System.out.println("capacite : "+capacite());
+        return taille()==capacite();
     }
 
     public boolean equals(Object o) {
-        // a completer
-        return false;
+        Pile tmp = (Pile) o;
+        if(this.taille()!= tmp.taille())return false;
+        if(this.capacite()!= tmp.capacite())return false;
+        for(int i=0;i<taille();i++){
+            boolean found = false;
+            for(int j=0;j<tmp.taille();j++){
+                if(zone[i] == tmp.zone[j])found = true;
+                System.out.println(i);
+            }
+            if(!found)return false;
+        }
+        return true;
     }
 
-    // fonction fournie
     public int hashCode() {
         return toString().hashCode();
     }
 
     public String toString() {
-        // a completer
-        return null;
+        StringBuffer sb = new StringBuffer("[");
+        for (int i = ptr - 1; i >= 0; i--) {
+            sb.append(zone[i]);
+            if (i > 0)
+                sb.append(", ");
+        }
+        sb.append("]");
+        return sb.toString();
     }
 }
